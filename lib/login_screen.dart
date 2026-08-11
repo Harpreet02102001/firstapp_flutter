@@ -1,4 +1,4 @@
-import 'package:firstapp/dashboard_card.dart';
+import 'package:firstapp/dashboard.dart';
 import 'package:firstapp/register_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -14,23 +14,36 @@ class LoginScreen extends StatelessWidget {
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: ListView(
+            // mainAxisAlignment: MainAxisAlignmeSinglent.center,
             children: [
               Image.asset('assets/images/c2vlogo.png', fit: BoxFit.contain),
               SizedBox(height: 30),
-              Text(
-                'Welcome Back',
-                style: TextStyle(
-                  fontSize: 24,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w700,
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Welcome Back',
+                    style: TextStyle(
+                      fontSize: 24,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ],
               ),
               SizedBox(height: 10),
-              Text(
-                'Nice to see you again',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Nice to see you again',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                ],
               ),
               SizedBox(height: 40),
               TextFormField(
@@ -44,7 +57,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 25),
+              const SizedBox(height: 20),
               TextField(
                 controller: passwordController,
                 obscureText: true,
@@ -58,7 +71,7 @@ class LoginScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15),
                   ),
                 ),
-            ),
+              ),
               SizedBox(height: 15),
               Row(
                 children: [
@@ -78,18 +91,21 @@ class LoginScreen extends StatelessWidget {
               SizedBox(height: 30),
               InkWell(
                 onTap: () {
-                   Navigator.of(context).push(
-                     MaterialPageRoute(builder: (context) => DashboardCard(icon: Icons.person, title: 'HEllo'),
-                     ),
-                   );
+                  Navigator.of(
+                    context,
+                  ).push(MaterialPageRoute(builder: (context) => Dashboard()));
                 },
                 child: Container(
                   padding: const EdgeInsets.all(16.0),
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       begin: Alignment.topLeft,
+
                       end: Alignment.bottomRight,
-                      colors: const [Color(0xFF283655),Color(0xFF53699A),                        Color(0xFF3F61AB),
+                      colors: const [
+                        Color(0xFF283655),
+                        Color(0xFF53699A),
+                        Color(0xFF3F61AB),
                       ],
                       stops: const [0.0, 1.0, 1.0],
                     ),
