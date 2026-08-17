@@ -20,7 +20,7 @@ class SubmitButton extends StatelessWidget {
         ).push(MaterialPageRoute(builder: (context) => Dashboard()));
       },
       child: Container(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(10.0),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,

@@ -28,7 +28,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Icon(Icons.arrow_back_ios),      
+        leading: Icon(Icons.arrow_back_ios),
         title: MainHeading(heading: "Create an account"),
         actions: [Icon(Icons.person)],
       ),
@@ -39,23 +39,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
             CommanTextformfield(
               label: "FIRST NAME",
               hint: "JOHN",
+              prefixIcon: Icon(Icons.person),
               isRequired: true,
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 8),
             CommanTextformfield(
               label: "MIDDLE NAME",
               hint: "",
               isRequired: false,
+              prefixIcon: Icon(Icons.person),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 8),
             CommanTextformfield(label: "LAST NAME", hint: "", isRequired: true),
-            SizedBox(height: 10),
+            SizedBox(height: 8),
             CommanTextformfield(
               label: "HOME ADDRESS",
               hint: "",
               isRequired: true,
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 8),
             Row(
               children: [
                 Expanded(
@@ -75,7 +77,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 8),
             Row(
               children: [
                 Expanded(
@@ -95,17 +97,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 8),
             CommanTextformfield(
               label: "CELL NUMBER",
-              hint: "",
+              hint: "(789)-465-4567",
               isRequired: true,
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 8),
             CommanTextformfield(label: "EMAIL", hint: "", isRequired: true),
-            SizedBox(height: 10),
-            CommanTextformfield(label: "PASSWORD", hint: "", isRequired: true),
-            SizedBox(height: 10),
+            SizedBox(height: 8),
+            CommanTextformfield(
+                label: "PASSWORD",
+                hint: "",
+                prefixIcon: Icon(Icons.eighteen_mp),
+                suffixIcon: Icon(Icons.remove_red_eye_outlined),
+                isRequired: true
+            ),
+            SizedBox(height: 8),
             CommanTextformfield(
               label: "CONFIRM PASSWORD",
               hint: "",

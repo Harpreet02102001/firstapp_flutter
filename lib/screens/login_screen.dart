@@ -1,19 +1,18 @@
 import 'package:firstapp/dashboard.dart';
 import 'package:firstapp/register_screen.dart';
+import 'package:firstapp/util/controller_getter.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
-
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.only(top: 100, left: 20, right: 20),
           child: ListView(
             // mainAxisAlignment: MainAxisAlignmeSinglent.center,
             children: [
@@ -46,32 +45,63 @@ class LoginScreen extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 40),
-              TextFormField(
-                controller: emailController,
-                decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.email),
-                  labelText: "Enter Your Email",
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue, width: 2.0),
-                    borderRadius: BorderRadius.circular(15),
+
+              Obx(() {
+                return TextFormField(
+                  controller: getLoginController.emailController,
+                  decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.email),
+                    labelText: "Enter Your Email",
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue, width: 2.0),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    errorText: getLoginController.emailError.value.isEmpty
+                        ? null
+                        : getLoginController.emailError.value,
                   ),
-                ),
-              ),
-              const SizedBox(height: 20),
-              TextField(
-                controller: passwordController,
-                obscureText: true,
-                keyboardType: TextInputType.visiblePassword,
-                decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.lock),
-                  suffixIcon: Icon(Icons.remove_red_eye_outlined),
-                  labelText: "Password",
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue, width: 2.0),
-                    borderRadius: BorderRadius.circular(15),
+                );
+              }),
+
+              const SizedBox(height: 15),
+              Obx(() {
+                return TextField(
+                  controller: getLoginController.passwordController,
+                  obscureText: true,
+                  keyboardType: TextInputType.visiblePassword,
+                  decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.lock),
+                    suffixIcon: Icon(Icons.remove_red_eye_outlined),
+                    labelText: "Password",
+                    errorText: getLoginController.passwordError.value.isEmpty
+                        ? null
+                        : getLoginController.passwordError.value,
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue, width: 2.0),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
                   ),
-                ),
-              ),
+                );
+              }),
+              Obx(() {
+                if (getLoginController.errorMessage.value.isEmpty) {
+                  return const SizedBox();
+                }
+
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 15),
+                  child: Text(
+                    getLoginController.errorMessage.value,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      color: Colors.red,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                );
+              }),
+              // obx ends here
               SizedBox(height: 15),
               Row(
                 children: [
@@ -91,12 +121,10 @@ class LoginScreen extends StatelessWidget {
               SizedBox(height: 30),
               InkWell(
                 onTap: () {
-                  Navigator.of(
-                    context,
-                  ).push(MaterialPageRoute(builder: (context) => Dashboard()));
+                  getLoginController.userLogin();
                 },
                 child: Container(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(10.0),
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       begin: Alignment.topLeft,
@@ -117,19 +145,35 @@ class LoginScreen extends StatelessWidget {
                       Text(
                         'LOGIN',
                         textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 16, color: Colors.white),
+                        style: TextStyle(fontSize:14,color: Colors.white),
                       ),
                     ],
                   ),
                 ),
               ),
+              Obx(() {
+                final user = getLoginController.user.value;
+
+                if (user == null) {
+                  return const SizedBox();
+                }
+
+                return Column(
+                  children: [
+                    const SizedBox(height: 30),
+                    Text("Name: ${user.name}"),
+                    Text("Email: ${user.email}"),
+                    Text("Status: ${user.status}"),
+                  ],
+                );
+              }),
               SizedBox(height: 120),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     'Don’t have an account yet? ',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
                   ),
                   InkWell(
                     onTap: () {
