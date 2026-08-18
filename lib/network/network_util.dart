@@ -19,11 +19,15 @@ class NetworkUtil {
     required String url,
     required Map<String, dynamic> body,
     required String authToken,
+    required dynamic headers,
   }) async {
     Map<String, String> header = {
       "Content-Type": "application/json",
       "Accept": "application/json",
     };
+    if (authToken != null && authToken.isNotEmpty) {
+      headers["Authorization"] = "Bearer $authToken";
+    }
     print('please wait for while ');
 
     var uri = Uri.parse(url);
@@ -40,4 +44,26 @@ class NetworkUtil {
   }
 
   //  delete request structure
+
+  static delete({
+    required String url,
+    required Map<String, dynamic> body,
+    required String authToken,
+  }) async {
+    Map<String, String> header = {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "Authorization": "Bearer @authToken",
+    };
+    print("delete function in process");
+
+    var uri = Uri.parse(url);
+    var response = await http.delete(
+      uri,
+      headers: header,
+      body: jsonEncode(body),
+    );
+
+    return response;
+  }
 }

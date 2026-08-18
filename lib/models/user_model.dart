@@ -1,20 +1,20 @@
 class User {
-  final int id;
-  final int roleId;
-  final String name;
-  final String firstName;
-  final String middleName;
-  final String lastName;
-  final String userName;
-  final String email;
-  final bool status;
-  final bool isProfileSetup;
-  final String userProfileColor;
-  final String createdAt;
-  final String updatedAt;
-  final bool isDisassociated;
-  final String thumbFileUrl;
-  final String subscriptionStatus;
+  final int? id;
+  final int? roleId;
+  final String? name;
+  final String? firstName;
+  final String? middleName;
+  final String? lastName;
+  final String? userName;
+  final String? email;
+  final bool? status;
+  final bool? isProfileSetup;
+  final String? userProfileColor;
+  final String? createdAt;
+  final String? updatedAt;
+  final bool? isDisassociated;
+  final String? thumbFileUrl;
+  final String? subscriptionStatus;
 
   User({
     required this.id,
@@ -51,8 +51,8 @@ class User {
       createdAt: json["created_at"],
       updatedAt: json["updated_at"],
       isDisassociated: json["is_disassociated"],
-      thumbFileUrl : json["thumb_file_url"],
-      subscriptionStatus :json["subscription_status"],
+      thumbFileUrl: json["thumb_file_url"],
+      subscriptionStatus: json["subscription_status"],
     );
   }
 }

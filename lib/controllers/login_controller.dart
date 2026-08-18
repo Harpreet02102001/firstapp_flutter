@@ -5,6 +5,7 @@ import 'package:firstapp/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart';
+import 'package:firstapp/dashboard.dart';
 import '../models/user_model.dart';
 
 class LoginController extends GetxController {
@@ -17,6 +18,9 @@ class LoginController extends GetxController {
 
   RxString emailError = "".obs;
   RxString passwordError = "".obs;
+
+  get UserModel => null;
+  get jsonData => null;
 
   //validate the user
   bool validateLoginFields() {
@@ -55,6 +59,7 @@ class LoginController extends GetxController {
         "password": "${passwordController.text}",
       },
       authToken: "",
+      headers: null,
     );
 
     //store the api response into variable responseData
@@ -62,7 +67,8 @@ class LoginController extends GetxController {
     final responseData = jsonDecode(response.body);
 
     if (response.statusCode == 200) {
-      user.value = User.fromJson(responseData["data"]);
+      User user = User.fromJson(responseData['data']);
+      // user.value = User.fromJson(responseData["data"]);
 
       // clear the previous error message
       errorMessage.value = "";
@@ -72,13 +78,49 @@ class LoginController extends GetxController {
         "Login successful",
         snackPosition: SnackPosition.TOP,
         duration: const Duration(seconds: 3),
+
+        // Position / spacing
+        margin: const EdgeInsets.all(15),
+
+        // Shape
+        borderRadius: 15,
+
+        // Background
+        backgroundColor: Colors.green,
+
+        // Text
+        titleText: const Text(
+          "Success",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+
+        messageText: const Text(
+          "Login successful",
+          style: TextStyle(color: Colors.white, fontSize: 14),
+        ),
+
+        // Icon
+        icon: const Icon(Icons.check_circle, color: Colors.white, size: 30),
+
+        // Prevent the snackbar from being too wide
+        maxWidth: 400,
       );
-      print(user.value?.name);
-      print(user.value?.email);
-      print(user.value?.subscriptionStatus);
+
+      // print(user.value?.name);
+      // print(user.value?.email);
+      // print(user.value?.subscriptionStatus);
+      print('User id : ${user.id}');
+      print('User Name : ${user.name}');
+      Get.off(() => Dashboard());
     } else {
       //handle the api error
       errorMessage.value = responseData["message"] ?? "Something went wrong";
     }
   }
 }
+
+
