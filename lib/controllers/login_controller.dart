@@ -1,7 +1,10 @@
 import 'dart:convert';
 import 'package:firstapp/network/api_endpoint.dart';
 import 'package:firstapp/network/network_util.dart';
+import 'package:firstapp/network/status_code_constant.dart';
 import 'package:firstapp/register_screen.dart';
+import 'package:firstapp/screens/activity_screen.dart';
+import 'package:firstapp/util/comman_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart';
@@ -9,18 +12,19 @@ import 'package:firstapp/dashboard.dart';
 import '../models/user_model.dart';
 
 class LoginController extends GetxController {
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController emailController = TextEditingController(
+    text: "mamtarte25@gmail.com",
+  );
+  final TextEditingController passwordController = TextEditingController(
+    text: "123456",
+  );
 
   // User? user;
-  Rxn<User> user = Rxn<User>();
+  Rxn<UserModel> user = Rxn<UserModel>();
   RxString errorMessage = "".obs;
 
   RxString emailError = "".obs;
   RxString passwordError = "".obs;
-
-  get UserModel => null;
-  get jsonData => null;
 
   //validate the user
   bool validateLoginFields() {
@@ -53,41 +57,35 @@ class LoginController extends GetxController {
     }
     //API REQUEST
     var response = await NetworkUtil.post(
-      url: ApiEndpoint.loginUrl,
+      url: ApiEndpoint.instance.loginUrl,
       body: {
         "email": "${emailController.text}",
         "password": "${passwordController.text}",
       },
-      authToken: "",
+      authToken: '',
       headers: null,
     );
 
     //store the api response into variable responseData
     //SERVER RESPONSE
     final responseData = jsonDecode(response.body);
-
-    if (response.statusCode == 200) {
-      User user = User.fromJson(responseData['data']);
+    if (response.statusCode == StatusCodeConstant.instance.successStatusCode) {
+      user.value = UserModel.fromJson(responseData);
       // user.value = User.fromJson(responseData["data"]);
 
       // clear the previous error message
       errorMessage.value = "";
+      //snackbar controlling start from here
 
-      Get.snackbar(
-        "Success",
-        "Login successful",
+      Get.snackbar("Success","Login successful",
         snackPosition: SnackPosition.TOP,
         duration: const Duration(seconds: 3),
-
         // Position / spacing
         margin: const EdgeInsets.all(15),
-
         // Shape
         borderRadius: 15,
-
         // Background
         backgroundColor: Colors.green,
-
         // Text
         titleText: const Text(
           "Success",
@@ -109,18 +107,15 @@ class LoginController extends GetxController {
         // Prevent the snackbar from being too wide
         maxWidth: 400,
       );
-
-      // print(user.value?.name);
-      // print(user.value?.email);
-      // print(user.value?.subscriptionStatus);
-      print('User id : ${user.id}');
-      print('User Name : ${user.name}');
+      //snackbar end's here
+     // CommanSnackbar("Login Successfully");
+      // print('User id : ${user.value?.id}');
+      // print('User Name : ${user.value?.name}');
       Get.off(() => Dashboard());
+      // Get.off(() => ActivityScreen());
     } else {
       //handle the api error
       errorMessage.value = responseData["message"] ?? "Something went wrong";
     }
   }
 }
-
-

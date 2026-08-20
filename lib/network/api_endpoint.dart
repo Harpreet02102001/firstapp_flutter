@@ -1,12 +1,12 @@
-import 'dart:convert';
-
 class ApiEndpoint {
-  static String baseUrl = "https://api-dev.clientvendor.com/api/v1";
+  ApiEndpoint._();
 
+  static final ApiEndpoint instance = ApiEndpoint._();
 
-  static String loginUrl = "${baseUrl}/login";
-  static String registerUrl = "${baseUrl}/register";
-  static  String authApi =  "${baseUrl}/auth/login";
-  static String  notificationApi = "${baseUrl}/notification";
+  String baseUrl = "https://api-dev.clientvendor.com/api/v1";
 
+  late String loginUrl = "${baseUrl}/login";
+  late String registerUrl = "${baseUrl}/register";
+  late String authApi = "${baseUrl}/auth/login";
+  late String notificationApi = "${baseUrl}/users/notifications";
 }

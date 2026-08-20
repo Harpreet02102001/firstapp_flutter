@@ -29,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: Colors.blue.shade100,
       body: Center(
         child: Container(
-          child: Image.asset("assets/images/logo.png", fit: BoxFit.cover,),
+          child: Image.asset("assets/images/Group.png", fit: BoxFit.cover,),
           decoration: BoxDecoration(
           ),
         ),

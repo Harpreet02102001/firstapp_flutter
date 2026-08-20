@@ -8,14 +8,19 @@ class NetworkUtil {
       "Accept": "application-json",
     };
 
+    if (authToken != null && authToken.isNotEmpty) {
+      header["Authorization"] = "Bearer $authToken";
+    }
     var uri = Uri.parse(url);
     var response = await http.get(uri, headers: header);
     print('Response status: ${response.statusCode}');
     print('Response body: ${response.body}');
+    return response;
   }
 
   //following is post method and above is get method need to understand deeply
   static post({
+    //properties belonging to the object
     required String url,
     required Map<String, dynamic> body,
     required String authToken,
@@ -53,9 +58,9 @@ class NetworkUtil {
     Map<String, String> header = {
       "Content-Type": "application/json",
       "Accept": "application/json",
-      "Authorization": "Bearer @authToken",
+      "Authorization": "Bearer $authToken",
     };
-    print("delete function in process");
+    // print("delete function in process");
 
     var uri = Uri.parse(url);
     var response = await http.delete(

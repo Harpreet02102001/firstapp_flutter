@@ -121,7 +121,7 @@ class LoginScreen extends StatelessWidget {
               SizedBox(height: 30),
               InkWell(
                 onTap: () {
-                  getLoginController.userLogin();
+                  var userLogin = getLoginController.userLogin();
                 },
                 child: Container(
                   padding: const EdgeInsets.all(10.0),
@@ -151,22 +151,22 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              Obx(() {
-                final user = getLoginController.user.value;
-
-                if (user == null) {
-                  return const SizedBox();
-                }
-
-                return Column(
-                  children: [
-                    const SizedBox(height: 30),
-                    Text("Name: ${user.name}"),
-                    Text("Email: ${user.email}"),
-                    Text("Status: ${user.status}"),
-                  ],
-                );
-              }),
+              // Obx(() {
+              //   final user = getLoginController.user.value;
+              //
+              //   if (user == null) {
+              //     return const SizedBox();
+              //   }
+              //
+              //   return Column(
+              //     children: [
+              //       const SizedBox(height: 30),
+              //       Text("Name: ${user.name}"),
+              //       Text("Email: ${user.email}"),
+              //       Text("Status: ${user.status}"),
+              //     ],
+              //   );
+              // }),
               SizedBox(height: 120),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

@@ -1,3 +1,4 @@
+import 'package:firstapp/components/comman_appbar.dart';
 import 'package:firstapp/components/comman_textformfield.dart';
 import 'package:firstapp/components/main_heading.dart';
 import 'package:firstapp/components/submit_button.dart';
@@ -27,11 +28,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: Icon(Icons.arrow_back_ios),
-        title: MainHeading(heading: "Create an account"),
-        actions: [Icon(Icons.person)],
-      ),
+      appBar: commonAppBar(title: "Create an account"),
+
+
       body: Padding(
         padding: const EdgeInsets.all(25.0),
         child: ListView(
