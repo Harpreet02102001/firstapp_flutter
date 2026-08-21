@@ -16,7 +16,7 @@ class LoginController extends GetxController {
     text: "mamtarte25@gmail.com",
   );
   final TextEditingController passwordController = TextEditingController(
-    text: "123456",
+    text: "123457",
   );
 
   // User? user;
