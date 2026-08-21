@@ -1,3 +1,4 @@
+import 'package:firstapp/controllers/activity_controller.dart';
 import 'package:firstapp/controllers/login_controller.dart';
 import 'package:firstapp/controllers/notification_controller.dart';
 import 'package:get/get.dart';
@@ -14,3 +15,8 @@ NotificationController get getNotificationController =>
         : Get.put<NotificationController>(NotificationController());
 
 
+
+ActivityController get getActivityController =>
+    Get.isRegistered<ActivityController>()
+        ? Get.find<ActivityController>()
+        : Get.put<ActivityController>(ActivityController());

@@ -5,7 +5,7 @@ class NetworkUtil {
   static get({required String url, required String authToken}) async {
     Map<String, String> header = {
       "Content-Type": "application/json",
-      "Accept": "application-json",
+      "Accept": "application/json",
     };
 
     if (authToken != null && authToken.isNotEmpty) {
@@ -13,8 +13,8 @@ class NetworkUtil {
     }
     var uri = Uri.parse(url);
     var response = await http.get(uri, headers: header);
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
+    // print('Response status: ${response.statusCode}');
+    // print('Response body: ${response.body}');
     return response;
   }
 
@@ -30,9 +30,9 @@ class NetworkUtil {
       "Content-Type": "application/json",
       "Accept": "application/json",
     };
-    if (authToken != null && authToken.isNotEmpty) {
-      headers["Authorization"] = "Bearer $authToken";
-    }
+    // if (authToken != null && authToken.isNotEmpty) {
+    //   headers["Authorization"] = "Bearer $authToken";
+    // }
     print('please wait for while ');
 
     var uri = Uri.parse(url);
@@ -42,8 +42,8 @@ class NetworkUtil {
       headers: header,
       body: jsonEncode(body),
     );
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
+    // print('Response status: ${response.statusCode}');
+    // print('Response body: ${response.body}');
 
     return response;
   }

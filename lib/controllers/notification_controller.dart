@@ -17,10 +17,6 @@ class NotificationController extends GetxController {
 
   getNotification() async {
     // // api request and await for response
-    // var response = await NetworkUtil.get(
-    //   url: ApiEndpoint.instance.notificationApi,
-    //   authToken: getLoginController.user.value!.token.accessToken,
-    // );
 
     var response = await NetworkUtil.get(
         url: ApiEndpoint.instance.notificationApi,

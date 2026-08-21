@@ -9,4 +9,5 @@ class ApiEndpoint {
   late String registerUrl = "${baseUrl}/register";
   late String authApi = "${baseUrl}/auth/login";
   late String notificationApi = "${baseUrl}/users/notifications";
+  late String ActivityApi = "${baseUrl}/users/activities";
 }

@@ -30,7 +30,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return Scaffold(
       appBar: commonAppBar(title: "Create an account"),
 
-
       body: Padding(
         padding: const EdgeInsets.all(25.0),
         child: ListView(
@@ -106,11 +105,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
             CommanTextformfield(label: "EMAIL", hint: "", isRequired: true),
             SizedBox(height: 8),
             CommanTextformfield(
-                label: "PASSWORD",
-                hint: "",
-                prefixIcon: Icon(Icons.eighteen_mp),
-                suffixIcon: Icon(Icons.remove_red_eye_outlined),
-                isRequired: true
+              label: "PASSWORD",
+              hint: "",
+              prefixIcon: Icon(Icons.eighteen_mp),
+              suffixIcon: Icon(Icons.remove_red_eye_outlined),
+              isRequired: true,
             ),
             SizedBox(height: 8),
             CommanTextformfield(
