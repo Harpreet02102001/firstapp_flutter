@@ -25,6 +25,7 @@ class LoginController extends GetxController {
 
   RxString emailError = "".obs;
   RxString passwordError = "".obs;
+  RxBool isLoading = false.obs;
 
   //validate the user before login
   bool validateLoginFields() {
@@ -57,7 +58,7 @@ class LoginController extends GetxController {
         "Incorrect login",
         "Please check your email and password and try again",
         snackPosition: SnackPosition.TOP,
-        duration: const Duration(seconds: 3),
+        duration: const Duration(seconds: 2),
         margin: const EdgeInsets.all(15),
         borderRadius: 15,
         backgroundColor: Colors.red,
@@ -142,9 +143,9 @@ class LoginController extends GetxController {
         Get.off(() => Dashboard());
       } else {
         //  invalid credentails and response code = 401/422
-        errorMessage.value = responseData["message"] ?? "Incorrect login";
+        errorMessage.value = responseData["message"] ?? "Something went wrong";
         Get.snackbar(
-          "Incorrect login",
+          "Login Failed",
           errorMessage.value,
           snackPosition: SnackPosition.TOP,
           duration: const Duration(seconds: 3),
@@ -179,6 +180,8 @@ class LoginController extends GetxController {
       );
       //print the error / after failed login
       print('userLogin error: $e');
+    } finally {
+      isLoading.value = false;
     }
   }
 }

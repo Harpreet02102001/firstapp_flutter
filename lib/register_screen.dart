@@ -28,7 +28,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: commonAppBar(title: "Create an account"),
+      // appBar: commonAppBar(title: "Create an account"),
+      appBar: CommanAppbar(title: "Create an account"),
 
       body: Padding(
         padding: const EdgeInsets.all(25.0),

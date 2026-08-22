@@ -6,6 +6,15 @@ import 'dashboard_card.dart';
 
 void main() => runApp(
     GetMaterialApp(
+      theme:  ThemeData(
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color(0xFF283655),
+          foregroundColor: Colors.white,   // title/icon color
+          elevation: 0,
+          // centerTitle: true,
+        )
+            
+      ),
       home: SplashScreen(),
       debugShowCheckedModeBanner: false,
     )

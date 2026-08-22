@@ -10,8 +10,14 @@ class Dashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: commonAppBar(title: "Dashboard", actions: Icons.notifications)
-       appBar: commonAppBar(title: "Dashboard test"),
+      appBar: CommanAppbar(
+        title: "Dashboard Test",
+        actionIcon: Icon(Icons.notifications, color: Colors.white),
+        onActionPressed: (){
+          Get.to(()=> NotificationScreen());
+        },
+      ),
+      //  appBar: commonAppBar(title: "Dashboard test"),
       body: Padding(
         padding: const EdgeInsets.all(15.0),
         child: ListView(
@@ -19,13 +25,13 @@ class Dashboard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Dashboard Screen", style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700,
-                ),),
+                // Text(
+                //   "Dashboard Screen",
+                //   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                // ),
               ],
             ),
-            SizedBox(height: 50,),
+            SizedBox(height: 50),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -52,7 +58,7 @@ class Dashboard extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.notifications,color: Colors.white,),
+                        Icon(Icons.notifications, color: Colors.white),
                         // Text(
                         //   'Notifications',
                         //   textAlign: TextAlign.center,
@@ -62,7 +68,7 @@ class Dashboard extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(width: 20,),
+                SizedBox(width: 20),
                 InkWell(
                   onTap: () {
                     Get.to(() => ActivityScreen());
@@ -91,15 +97,14 @@ class Dashboard extends StatelessWidget {
                         //   textAlign: TextAlign.center,
                         //   style: TextStyle(fontSize: 14, color: Colors.white),
                         // ),
-                        Icon(Icons.message,color: Colors.white,),
+                        Icon(Icons.message, color: Colors.white),
                       ],
                     ),
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 20,),
-
+            SizedBox(height: 20),
           ],
         ),
       ),

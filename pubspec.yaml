@@ -37,10 +37,16 @@ dependencies:
   cupertino_icons: ^1.0.8
   get: ^4.7.3
   http: ^1.6.0
+#
+#dev_dependencies:
+#  flutter_test:
+#    sdk: flutter
+#    flutter_launch_icons: ^0.14.3 # check pub.dev for the latest version
 
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
+#    flutter_launcher_icons:
+#      android: "launch_icon"
+#      ios: false
+#      images_path: assets/images/logo.png
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

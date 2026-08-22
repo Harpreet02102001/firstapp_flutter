@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CommanTextformfield extends StatelessWidget {
+
   //this is a contructor property
   const CommanTextformfield({
     super.key,
@@ -9,7 +10,6 @@ class CommanTextformfield extends StatelessWidget {
     required this.isRequired,
              this.prefixIcon,
              this.suffixIcon
-
   //mentioned  required things above
  });
 
