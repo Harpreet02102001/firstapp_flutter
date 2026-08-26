@@ -5,9 +5,10 @@ class ApiEndpoint {
 
   String baseUrl = "https://api-dev.clientvendor.com/api/v1";
 
-  late String loginUrl = "${baseUrl}/login";
-  late String registerUrl = "${baseUrl}/register";
-  late String authApi = "${baseUrl}/auth/login";
-  late String notificationApi = "${baseUrl}/users/notifications";
-  late String ActivityApi = "${baseUrl}/users/activities";
+  late String loginUrl         = "${baseUrl}/login";
+  late String registerUrl      = "${baseUrl}/register";
+  late String authApi          = "${baseUrl}/auth/login";
+  late String notificationApi  = "${baseUrl}/users/notifications";
+  late String activityApi      = "${baseUrl}/users/activities";
+
 }

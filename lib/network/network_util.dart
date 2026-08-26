@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class NetworkUtil {
+  //get request to hit the get request
   static get({required String url, required String authToken}) async {
     Map<String, String> header = {
       "Content-Type": "application/json",
@@ -18,7 +19,7 @@ class NetworkUtil {
     return response;
   }
 
-  //following is post method and above is get method need to understand deeply
+  // post method to hit post request
   static post({
     //properties belonging to the object
     required String url,

@@ -13,6 +13,7 @@ class ActivityController extends GetxController {
   RxBool isLoading = false.obs;
 
   getActivity() async {
+    //variable for token
     final token = getLoginController.user.value!.token.accessToken;
 
     if (token == null || token.isEmpty) {
@@ -20,26 +21,31 @@ class ActivityController extends GetxController {
       print("get activity failed : no auth token");
       return;
     }
-
     isLoading.value = true;
+
     try {
       //api request and wait for response
       var response = await NetworkUtil.get(
-        url: ApiEndpoint.instance.ActivityApi,
+        url: ApiEndpoint.instance.activityApi,
         authToken: token,
       );
-      // check status code before procedding
+      // print("ACTIVITY STATUS CODE: ${response.statusCode}");
+      // print("ACTIVITY BODY: ${response.body}");
 
+      // check status code before proceed
       if (response.statusCode ==
           StatusCodeConstant.instance.successStatusCode) {
         final responseData = jsonDecode(response.body);
         activity.value = ActivityModel.fromJson(responseData);
         // print("getActivity>>${activity.value?.data.length}");
+      } else {
+        print(
+          "getActivity failed : status ${response.statusCode},body ${response.body} ",
+        );
       }
-    } catch (e){
+    } catch (e) {
       print("getActivity error : $e");
-    }
-    finally {
+    } finally {
       isLoading.value = false;
     }
   }

@@ -18,16 +18,19 @@ class NotificationController extends GetxController {
     final token = getLoginController.user.value!.token.accessToken;
 
     if (token == null || token.isEmpty) {
+      // not logged in / session out/ lost, don't force- unwrap null, just bail
       print("get notification &  auth is failed : no auth Token");
       return;
     }
     isLoading.value = true;
 
     try {
+      //request with api ans wait for response
       var response = await NetworkUtil.get(
         url: ApiEndpoint.instance.notificationApi,
-        authToken: getLoginController.user.value!.token.accessToken,
+        authToken: token,
       );
+      //check for response code and than proceed
 
       if (response.statusCode ==
           StatusCodeConstant.instance.successStatusCode) {
@@ -37,7 +40,7 @@ class NotificationController extends GetxController {
         // print("getNotification>>${notification.value?.data.length}");
       }
     } catch (e) {
-      print("getActivityError : $e");
+      print("getActivity Error : $e");
     } finally {
       isLoading.value = false;
     }

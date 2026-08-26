@@ -35,7 +35,7 @@ class Datum {
   final ObjectType objectType;
   final String action;
   final int isRead;
-  final dynamic metaData;
+  final MetaDataClass metaData;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -43,12 +43,12 @@ class Datum {
     required this.id,
     required this.agentId,
     required this.objectId,
-    required this.objectType,
     required this.action,
     required this.isRead,
     required this.metaData,
     required this.createdAt,
     required this.updatedAt,
+    required this.objectType,
   });
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
@@ -58,7 +58,12 @@ class Datum {
     objectType: objectTypeValues.map[json["object_type"]]!,
     action: json["action"],
     isRead: json["is_read"],
-    metaData: json["meta_data"],
+    // metaData: json["meta_data"],
+    metaData: MetaDataClass.fromJson(
+      json["meta_data"] is Map
+          ? Map<String, dynamic>.from(json["meta_data"])
+          : {},
+    ),
     createdAt: DateTime.parse(json["created_at"]),
     updatedAt: DateTime.parse(json["updated_at"]),
   );
@@ -70,7 +75,7 @@ class Datum {
     "object_type": objectTypeValues.reverse[objectType],
     "action": action,
     "is_read": isRead,
-    "meta_data": metaData,
+    "meta_data": metaData.toJson(),
     "created_at": createdAt.toIso8601String(),
     "updated_at": updatedAt.toIso8601String(),
   };
@@ -101,19 +106,82 @@ class MetaDataClass {
     this.company,
   });
 
-  factory MetaDataClass.fromJson(Map<String, dynamic> json) => MetaDataClass(
-    client: json["client"] == null ? null : Client.fromJson(json["client"]),
-    connection: json["connection"] == null ? null : Connection.fromJson(json["connection"]),
-    invitation: json["invitation"] == null ? null : Invitation.fromJson(json["invitation"]),
-    senderUser: json["sender_user"] == null ? null : Client.fromJson(json["sender_user"]),
-    receiverUser: json["receiver_user"] == null ? null : Client.fromJson(json["receiver_user"]),
-    senderConnection: json["sender_connection"] == null ? null : Connection.fromJson(json["sender_connection"]),
-    receiverConnection: json["receiver_connection"] == null ? null : Connection.fromJson(json["receiver_connection"]),
-    task: json["task"] == null ? null : Connection.fromJson(json["task"]),
-    user: json["user"] == null ? null : Client.fromJson(json["user"]),
-    company: json["company"] == null ? null : Company.fromJson(json["company"]),
-  );
+  // factory MetaDataClass.fromJson(Map<String, dynamic> json) =>
+  //     MetaDataClass(
+  //   client: json["client"] == null ? null : Client.fromJson(json["client"]),
+  //   connection: json["connection"] == null ? null : Connection.fromJson(json["connection"]),
+  //   invitation: json["invitation"] == null ? null : Invitation.fromJson(json["invitation"]),
+  //   senderUser: json["sender_user"] == null ? null : Client.fromJson(json["sender_user"]),
+  //   receiverUser: json["receiver_user"] == null ? null : Client.fromJson(json["receiver_user"]),
+  //   senderConnection: json["sender_connection"] == null ? null : Connection.fromJson(json["sender_connection"]),
+  //   receiverConnection: json["receiver_connection"] == null ? null : Connection.fromJson(json["receiver_connection"]),
+  //   task: json["task"] == null ? null : Connection.fromJson(json["task"]),
+  //   user: json["user"] == null ? null : Client.fromJson(json["user"]),
+  //   company: json["company"] == null ? null : Company.fromJson(json["company"]),
+  // );
 
+  factory MetaDataClass.fromJson(Map<String, dynamic> json) =>
+      MetaDataClass(
+        client: json["client"] is Map
+            ? Client.fromJson(
+          Map<String, dynamic>.from(json["client"]),
+        )
+            : null,
+
+        connection: json["connection"] is Map
+            ? Connection.fromJson(
+          Map<String, dynamic>.from(json["connection"]),
+        )
+            : null,
+
+        invitation: json["invitation"] is Map
+            ? Invitation.fromJson(
+          Map<String, dynamic>.from(json["invitation"]),
+        )
+            : null,
+
+        senderUser: json["sender_user"] is Map
+            ? Client.fromJson(
+          Map<String, dynamic>.from(json["sender_user"]),
+        )
+            : null,
+
+        receiverUser: json["receiver_user"] is Map
+            ? Client.fromJson(
+          Map<String, dynamic>.from(json["receiver_user"]),
+        )
+            : null,
+
+        senderConnection: json["sender_connection"] is Map
+            ? Connection.fromJson(
+          Map<String, dynamic>.from(json["sender_connection"]),
+        )
+            : null,
+
+        receiverConnection: json["receiver_connection"] is Map
+            ? Connection.fromJson(
+          Map<String, dynamic>.from(json["receiver_connection"]),
+        )
+            : null,
+
+        task: json["task"] is Map
+            ? Connection.fromJson(
+          Map<String, dynamic>.from(json["task"]),
+        )
+            : null,
+
+        user: json["user"] is Map
+            ? Client.fromJson(
+          Map<String, dynamic>.from(json["user"]),
+        )
+            : null,
+
+        company: json["company"] is Map
+            ? Company.fromJson(
+          Map<String, dynamic>.from(json["company"]),
+        )
+            : null,
+      );
   Map<String, dynamic> toJson() => {
     "client": client?.toJson(),
     "connection": connection?.toJson(),
