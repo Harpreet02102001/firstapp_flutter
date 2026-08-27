@@ -35,7 +35,7 @@ class Datum {
   final ObjectType objectType;
   final String action;
   final int isRead;
-  final MetaDataClass metaData;
+  final dynamic metaData;
   final DateTime createdAt;
   final DateTime updatedAt;
         String message;
@@ -61,12 +61,8 @@ class Datum {
     action: json["action"],
     message: json["message"]?? '',
     isRead: json["is_read"],
-    // metaData: json["meta_data"],
-    metaData: MetaDataClass.fromJson(
-      json["meta_data"] is Map
-          ? Map<String, dynamic>.from(json["meta_data"])
-          : {},
-    ),
+    metaData: json["meta_data"],
+
     createdAt: DateTime.parse(json["created_at"]),
     updatedAt: DateTime.parse(json["updated_at"]),
   );
@@ -110,19 +106,6 @@ class MetaDataClass {
     this.company,
   });
 
-  // factory MetaDataClass.fromJson(Map<String, dynamic> json) =>
-  //     MetaDataClass(
-  //   client: json["client"] == null ? null : Client.fromJson(json["client"]),
-  //   connection: json["connection"] == null ? null : Connection.fromJson(json["connection"]),
-  //   invitation: json["invitation"] == null ? null : Invitation.fromJson(json["invitation"]),
-  //   senderUser: json["sender_user"] == null ? null : Client.fromJson(json["sender_user"]),
-  //   receiverUser: json["receiver_user"] == null ? null : Client.fromJson(json["receiver_user"]),
-  //   senderConnection: json["sender_connection"] == null ? null : Connection.fromJson(json["sender_connection"]),
-  //   receiverConnection: json["receiver_connection"] == null ? null : Connection.fromJson(json["receiver_connection"]),
-  //   task: json["task"] == null ? null : Connection.fromJson(json["task"]),
-  //   user: json["user"] == null ? null : Client.fromJson(json["user"]),
-  //   company: json["company"] == null ? null : Company.fromJson(json["company"]),
-  // );
 
   factory MetaDataClass.fromJson(Map<String, dynamic> json) =>
       MetaDataClass(

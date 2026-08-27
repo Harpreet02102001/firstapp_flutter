@@ -46,7 +46,7 @@ class NotificationController extends GetxController {
         // create a notificationActionList variable and store list in variable
         var notificationActionList = NotificationActionUtil.list;
 
-        print(notificationActionList.first.message);
+        // print(notificationActionList.first.message);
 
         for (int i = 0; i < notification.value!.data.length; i++) {
           var item = notification.value!.data[i];
@@ -59,7 +59,7 @@ class NotificationController extends GetxController {
         }
       }
     } catch (e, t) {
-      print("getActivity Error : $e , $t");
+      print("getActivity Error : $e");
     } finally {
       isLoading.value = false;
     }

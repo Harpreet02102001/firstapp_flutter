@@ -13,7 +13,7 @@ class NetworkUtil {
       header["Authorization"] = "Bearer $authToken";
     }
     var uri = Uri.parse(url);
-    var response = await http.get(uri, headers: header);
+    var response = await http.get(uri, headers: header); 
     // print('Response status: ${response.statusCode}');
     // print('Response body: ${response.body}');
     return response;

@@ -25,6 +25,7 @@ class ActivityModel {
   Map<String, dynamic> toJson() => {
     "data": List<dynamic>.from(data.map((x) => x.toJson())),
     "meta": meta.toJson(),
+
   };
 }
 
@@ -33,9 +34,9 @@ class Datum {
   final int agentId;
   final int objectId;
   final ObjectType objectType;
-  final Action action;
+  final String action;
   final int isRead;
-  final MetaData metaData;
+  final dynamic metaData;
   final DateTime createdAt;
   final DateTime updatedAt;
         String message;
@@ -61,10 +62,11 @@ class Datum {
     agentId: json["agent_id"],
     objectId: json["object_id"],
     objectType: objectTypeValues.map[json["object_type"]]!,
-    action: actionValues.map[json["action"]]!,
+    action: json["action"],
     message: json['message']?? "",
     isRead: json["is_read"],
-    metaData: MetaData.fromJson(json["meta_data"]),
+    metaData: json["meta_data"],
+    // metaData: MetaData.fromJson(json["meta_data"]),
     createdAt: DateTime.parse(json["created_at"]),
     updatedAt: DateTime.parse(json["updated_at"]),
   );
@@ -74,7 +76,7 @@ class Datum {
     "agent_id": agentId,
     "object_id": objectId,
     "object_type": objectTypeValues.reverse[objectType],
-    "action": actionValues.reverse[action],
+    "action": action,
     "message": message,
     "is_read": isRead,
     "meta_data": metaData.toJson(),
@@ -82,26 +84,7 @@ class Datum {
     "updated_at": updatedAt.toIso8601String(),
   };
 }
-enum Action {
-  CLIENT_INVITED_TO_AGENT,
-  SUB_MILESTONE_DOCUMENT_UPLOADED_SELF,
-  TRANSACTION_AGENT_INVITE_SENT_TO_RECEIVER_AGENT,
-  TRANSACTION_CREATE_TO_SELF,
-  CLIENT_REGISTRATION,
-  VENDOR_REGISTRATION,
-  VENDOR_INVITE_SENT_TO_AGENT,
-   // fallback for any future/unmapped action from backend
-}
 
-final actionValues = EnumValues({
-  "CLIENT_INVITED_TO_AGENT": Action.CLIENT_INVITED_TO_AGENT,
-  "SUB_MILESTONE_DOCUMENT_UPLOADED_SELF": Action.SUB_MILESTONE_DOCUMENT_UPLOADED_SELF,
-  "TRANSACTION_AGENT_INVITE_SENT_TO_RECEIVER_AGENT": Action.TRANSACTION_AGENT_INVITE_SENT_TO_RECEIVER_AGENT,
-  "TRANSACTION_CREATE_TO_SELF": Action.TRANSACTION_CREATE_TO_SELF,
-  "CLIENT_REGISTRATION": Action.CLIENT_REGISTRATION,
-  "VENDOR_REGISTRATION": Action.VENDOR_REGISTRATION,
-  "VENDOR_INVITE_SENT_TO_AGENT": Action.VENDOR_INVITE_SENT_TO_AGENT,
-});
 
 class MetaData {
   final dynamic user;

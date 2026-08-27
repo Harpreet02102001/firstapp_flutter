@@ -1,6 +1,5 @@
 import 'package:firstapp/components/comman_appbar.dart';
 import 'package:firstapp/components/comman_loader.dart';
-import '../network/activity_util_action.dart';
 import 'package:firstapp/util/controller_getter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,7 +18,6 @@ class _ActivityScreenState extends State<ActivityScreen> {
   void initState() {
     //TODO : implement intiState
     super.initState();
-
     getActivityController.getActivity();
   }
 

@@ -1,7 +1,7 @@
 import 'package:firstapp/models/action_model.dart';
 
 class ActivityActionUtil {
-  var list = [
+  static var list = [
     ActionModel(
       action: 'AGENT_REGISTRATION',
       message: "[Agent Name] has joined C2V",
@@ -162,12 +162,12 @@ class ActivityActionUtil {
     ),
     ActionModel(
       action: 'TRANSACTION_CREATE_TO_CLIENT',
-      message: "No message here",
+      message: "New [Buyer Transaction or Seller Transaction] created for [Property Address].",
       showAcceptRejectButton: false,
     ),
     ActionModel(
       action: 'TRANSACTION_CREATE_TO_SELF',
-      message: "No message here",
+      message: "New [Buyer Transaction or Seller Transaction] created for [Property Address] - [Client Name]",
       showAcceptRejectButton: false,
     ),
     ActionModel(
