@@ -38,6 +38,8 @@ class Datum {
   final MetaData metaData;
   final DateTime createdAt;
   final DateTime updatedAt;
+        String message;
+
 
   Datum({
     required this.id,
@@ -49,6 +51,9 @@ class Datum {
     required this.metaData,
     required this.createdAt,
     required this.updatedAt,
+    required this.message,
+
+
   });
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
@@ -57,6 +62,7 @@ class Datum {
     objectId: json["object_id"],
     objectType: objectTypeValues.map[json["object_type"]]!,
     action: actionValues.map[json["action"]]!,
+    message: json['message']?? "",
     isRead: json["is_read"],
     metaData: MetaData.fromJson(json["meta_data"]),
     createdAt: DateTime.parse(json["created_at"]),
@@ -69,6 +75,7 @@ class Datum {
     "object_id": objectId,
     "object_type": objectTypeValues.reverse[objectType],
     "action": actionValues.reverse[action],
+    "message": message,
     "is_read": isRead,
     "meta_data": metaData.toJson(),
     "created_at": createdAt.toIso8601String(),
@@ -83,7 +90,7 @@ enum Action {
   CLIENT_REGISTRATION,
   VENDOR_REGISTRATION,
   VENDOR_INVITE_SENT_TO_AGENT,
-  UNKNOWN, // fallback for any future/unmapped action from backend
+   // fallback for any future/unmapped action from backend
 }
 
 final actionValues = EnumValues({

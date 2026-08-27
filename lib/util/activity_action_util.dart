@@ -162,12 +162,12 @@ class ActivityActionUtil {
     ),
     ActionModel(
       action: 'TRANSACTION_CREATE_TO_CLIENT',
-      message: "",
+      message: "No message here",
       showAcceptRejectButton: false,
     ),
     ActionModel(
       action: 'TRANSACTION_CREATE_TO_SELF',
-      message: "",
+      message: "No message here",
       showAcceptRejectButton: false,
     ),
     ActionModel(
@@ -355,7 +355,7 @@ class ActivityActionUtil {
     ),
     ActionModel(
       action: "VENDOR_CONFIRMED_NO_DID_YOU_CONTACT_CLIENT_TO_AGENT",
-      message: 'VENDOR_CONFIRMED_NO_DID_YOU_CONTACT_CLIENT_TO_AGENT',
+      message: '[Vendor Name] from [Vendor Company Name] has indicated no contact with [Client Name] for "[Task Name]"',
       showAcceptRejectButton: false,
     ),
     ActionModel(

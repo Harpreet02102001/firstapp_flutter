@@ -38,7 +38,7 @@ class Datum {
   final MetaDataClass metaData;
   final DateTime createdAt;
   final DateTime updatedAt;
-
+        String message;
   Datum({
     required this.id,
     required this.agentId,
@@ -49,6 +49,8 @@ class Datum {
     required this.createdAt,
     required this.updatedAt,
     required this.objectType,
+    required this.message,
+
   });
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
@@ -57,6 +59,7 @@ class Datum {
     objectId: json["object_id"],
     objectType: objectTypeValues.map[json["object_type"]]!,
     action: json["action"],
+    message: json["message"]?? '',
     isRead: json["is_read"],
     // metaData: json["meta_data"],
     metaData: MetaDataClass.fromJson(
@@ -74,6 +77,7 @@ class Datum {
     "object_id": objectId,
     "object_type": objectTypeValues.reverse[objectType],
     "action": action,
+    "message": message,
     "is_read": isRead,
     "meta_data": metaData.toJson(),
     "created_at": createdAt.toIso8601String(),

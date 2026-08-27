@@ -119,6 +119,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(15.0),
+        //play loader before getting the loader
         child: Obx(() {
           if (getNotificationController.isLoading.value) {
             return const CommanLoader(
@@ -139,7 +140,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
             itemBuilder: (context, index) {
               final item = notification.data[index];
 
-              final message = NotificationUtilAction.getNotification(item);
+              final message = item.message;
 
               return Container(
                 margin: const EdgeInsets.only(bottom: 12),

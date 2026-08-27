@@ -7,8 +7,6 @@ import 'package:get/get.dart';
 import 'package:firstapp/models/activity_model.dart';
 import '../components/main_heading.dart';
 
-
-
 class ActivityScreen extends StatefulWidget {
   const ActivityScreen({super.key});
 
@@ -51,8 +49,9 @@ class _ActivityScreenState extends State<ActivityScreen> {
             itemCount: getActivityController.activity.value!.data.length,
             itemBuilder: (context, index) {
               final item = activity.data[index];
-              final message = ActivityUtilAction.getActivity(item);
+              // final message = ActivityUtilAction.getActivity(item);
 
+              final message = item.message;
               // return Text("${item.action}");
               return Container(
                 margin: const EdgeInsets.only(bottom: 12),

@@ -1,8 +1,7 @@
 class ActionModel {
   final String action;
-  final String message;
+  final  String message;
   final bool showAcceptRejectButton;
-
 
   //constructor function
   ActionModel({

@@ -1,7 +1,26 @@
 import '../models/action_model.dart';
 
 class NotificationActionUtil {
-  var list = [
+  static var list = [
+    ActionModel(
+      action: "TRANSACTION_AGENT_INVITE_SENT_TO_SELF",
+      message:
+          "[Receiver Agent Name] invited to Transaction Name:  [Transaction Name]",
+      showAcceptRejectButton: false,
+    ),
+    ActionModel(
+      action: 'TRANSACTION_AGENT_INVITE_ACCEPTED_BY_SELF',
+      message:
+          "You accepted transaction connection invitation from [Sender Agent Name] for '[Receiver Transaction Title]'",
+      showAcceptRejectButton: false,
+    ),
+    ActionModel(
+      action: "TRANSACTION_AGENT_INVITE_SENT_TO_AGENT",
+      message:
+          "[Receiver Agent Name] accepted your transaction connection invitation for [Sender Transaction Title]",
+      showAcceptRejectButton: false,
+    ),
+
     ActionModel(
       action: 'VENDOR_REGISTRATION',
       message:
@@ -61,6 +80,7 @@ class NotificationActionUtil {
       message: '[Client Name] has declined invitation to join your network',
       showAcceptRejectButton: false,
     ),
+
     ActionModel(
       action: 'CLIENT_INVITATION_EXPIRED',
       message: '[Client Name]s invitation to join your network has expired.',

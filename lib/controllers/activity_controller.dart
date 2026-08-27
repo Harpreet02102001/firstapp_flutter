@@ -2,11 +2,13 @@ import 'dart:convert';
 import 'package:firstapp/controllers/login_controller.dart';
 import 'package:firstapp/models/activity_model.dart';
 import 'package:firstapp/models/user_model.dart';
+import 'package:firstapp/network/activity_util_action.dart';
 import 'package:firstapp/network/api_endpoint.dart';
 import 'package:firstapp/network/network_util.dart';
 import 'package:firstapp/network/status_code_constant.dart';
 import 'package:firstapp/util/controller_getter.dart';
 import 'package:get/get.dart';
+import '../util/activity_action_util.dart';
 
 class ActivityController extends GetxController {
   Rxn<ActivityModel> activity = Rxn<ActivityModel>();
@@ -30,23 +32,40 @@ class ActivityController extends GetxController {
         authToken: token,
       );
       // print("ACTIVITY STATUS CODE: ${response.statusCode}");
-      // print("ACTIVITY BODY: ${response.body}");
+      // print("ACTIVI
+      // TY BODY: ${response.body}");
 
       // check status code before proceed
       if (response.statusCode ==
           StatusCodeConstant.instance.successStatusCode) {
         final responseData = jsonDecode(response.body);
-        activity.value = ActivityModel.fromJson(responseData);
-        // print("getActivity>>${activity.value?.data.length}");
-      } else {
-        print(
-          "getActivity failed : status ${response.statusCode},body ${response.body} ",
-        );
-      }
-    } catch (e) {
-      print("getActivity error : $e");
+
+         activity.value = ActivityModel.fromJson(responseData);
+
+        final activityList = ActivityActionUtil().list;
+
+
+
+        // for (var item in activityList) {
+        //  print(item.message);
+        // }
+
+        for (int i = 0; i < activity.value!.data.length; i++) {
+         var item = activity.value!.data[i];
+         // print(item.message.length);
+         var result = activityList.firstWhereOrNull(
+              (element) => element.action == item.action,
+         );
+
+         if (result != null) {
+          item.message = result.message;
+         }
+        } // for loop
+      } // if success
+    } catch (e, t) {
+     print("getActivity Error : $e , $t");
     } finally {
-      isLoading.value = false;
+     isLoading.value = false;
     }
-  }
+  } // getActivity
 }
