@@ -95,6 +95,7 @@ class LoginController extends GetxController {
       //store the api response into variable responseData
       //SERVER RESPONSE
       final responseData = jsonDecode(response.body);
+      // print(responseData);
       if (response.statusCode ==
           StatusCodeConstant.instance.successStatusCode) {
         user.value = UserModel.fromJson(responseData);

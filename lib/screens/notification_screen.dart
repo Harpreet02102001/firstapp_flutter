@@ -3,6 +3,7 @@ import 'package:firstapp/components/comman_loader.dart';
 import 'package:firstapp/util/controller_getter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:firstapp/models/activity_model.dart';
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({super.key});
@@ -14,7 +15,6 @@ class NotificationScreen extends StatefulWidget {
 class _NotificationScreenState extends State<NotificationScreen> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     getNotificationController.getNotification();
@@ -23,40 +23,49 @@ class _NotificationScreenState extends State<NotificationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: commonAppBar(title: "Notification Screen", ),
       appBar: CommanAppbar(
         title: "Notification Screen",
-        actionIcon: Icon(Icons.more_vert, color: Colors.white),
+        actionIcon: const Icon(
+          Icons.more_vert,
+          color: Colors.white,
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(15.0),
+        //play loader before getting the loader
         child: Obx(() {
-          //still loading -> Spinner
           if (getNotificationController.isLoading.value) {
-            return const CommanLoader(message: "Loading Notification");
+            return const CommanLoader(
+              message: "Loading Notification",
+            );
           }
+
           final notification = getNotificationController.notification.value;
-          //finished the loading but nothing came back -> blank response and null in response
+
           if (notification == null || notification.data.isEmpty) {
-            return const Center(child: Text("No Notification yet"));
+            return const Center(
+              child: Text("No Notification yet"),
+            );
           }
 
-          //return the data here, after complete the api process and response
           return ListView.builder(
-            itemCount:
-                getNotificationController.notification.value?.data.length,
+            itemCount: notification.data.length,
+            itemBuilder: (context, index) {
+              final item = notification.data[index];
 
-            itemBuilder: (c, i) {
-              var item = getNotificationController.notification.value!.data[i];
+              final message = item.message;
 
               return Container(
                 margin: const EdgeInsets.only(bottom: 12),
                 padding: const EdgeInsets.all(15),
                 decoration: BoxDecoration(
-                  // unread notifications get a light blue tint, read ones stay white
-                  color: item.isRead == 0 ? Colors.blue.shade50 : Colors.white,
+                  color: item.isRead == 0
+                      ? Colors.blue.shade50
+                      : Colors.white,
+                  border: Border.all(
+                    color: Colors.grey.shade300,
+                  ),
                   borderRadius: BorderRadius.circular(15),
-                  border: Border.all(color: Colors.grey.shade300),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.09),
@@ -66,17 +75,20 @@ class _NotificationScreenState extends State<NotificationScreen> {
                   ],
                 ),
                 child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // unread = filled dot, read = outline
                     Icon(
                       item.isRead == 0 ? Icons.circle : Icons.circle_outlined,
                       size: 10,
-                      color: item.isRead == 0 ? Colors.blue : Colors.grey,
+                      color: item.isRead == 0
+                          ? Colors.blue
+                          : Colors.grey,
                     ),
+
                     const SizedBox(width: 12),
+
                     Expanded(
-                      child: Text(
-                        item.action,
+                      child: Text(message,
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: item.isRead == 0
