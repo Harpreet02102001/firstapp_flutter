@@ -20,6 +20,7 @@ class ActivityController extends GetxController {
       print("get activity failed : no auth token");
       return;
     }
+
     isLoading.value = true;
 
     try {
@@ -28,7 +29,6 @@ class ActivityController extends GetxController {
         url: ApiEndpoint.instance.activityApi,
         authToken: token,
       );
-
 
       // check status code before proceed
       if (response.statusCode ==

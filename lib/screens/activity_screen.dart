@@ -35,9 +35,10 @@ class _ActivityScreenState extends State<ActivityScreen> {
           if (getActivityController.isLoading.value) {
             return const CommanLoader(message: "Loading Activity");
           }
-          final activity = getActivityController.activity.value;
 
-          //finished the loading but noting came back -> blank response
+
+          //finished the loading but noting return  back and no activity message -> blank response
+          final activity = getActivityController.activity.value;
           if (activity == null || activity.data.isEmpty) {
             return const Center(child: Text("No Activity Yet"));
           }
