@@ -11,4 +11,5 @@ class ApiEndpoint {
   late String notificationApi = "${baseUrl}/users/notifications";
   late String activityApi = "${baseUrl}/users/activities";
   late String transactionApi = "${baseUrl}/transactions";
+  late String transaction_status = "${baseUrl}/master-services/transaction_status/";
 }

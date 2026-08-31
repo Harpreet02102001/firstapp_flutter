@@ -35,7 +35,7 @@ class TransactionController extends GetxController {
         // print(responseData);
       }
     } catch (e, t) {
-      print("catch condition is working now");
+      print("catch condition is  working now and something went wrong");
     }
     finally{
       isLoading.value = false;

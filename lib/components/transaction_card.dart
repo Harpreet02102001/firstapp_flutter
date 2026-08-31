@@ -1,3 +1,6 @@
+import 'package:firstapp/components/comman_button.dart';
+import 'package:firstapp/components/submit_button.dart';
+import 'package:firstapp/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CommanCard extends StatelessWidget {
@@ -26,6 +29,7 @@ class CommanCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 0,
+      color: AppColors.white,
       margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
@@ -38,24 +42,39 @@ class CommanCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                const Icon(Icons.tag, color: Colors.blue),
+                //tag icon and text beginning here
+                const Icon(
+                  Icons.tag_outlined,
+                  size: 20,
+                  color: Color(0xFF4B73B0),
+                ),
                 const SizedBox(width: 3),
-                Text(transactionId, style: TextStyle(color: Colors.blue)),
+                Text(
+                  transactionId,
+                  style: TextStyle(
+                    color: AppColors.primary,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+
                 const SizedBox(width: 12),
+
                 Container(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 10,
                     vertical: 7,
                   ),
                   decoration: BoxDecoration(
-                    color: const Color(0xffe4f1f2),
+                    color: Color(0xffe4f1f2),
                     borderRadius: BorderRadius.circular(8),
                   ),
+                  //badge section start from here
                   child: Text(
                     badgeName,
                     style: TextStyle(
                       color: Color(0xff397786),
-                      fontSize: 14,
+                      fontSize: 12,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -63,14 +82,15 @@ class CommanCard extends StatelessWidget {
               ],
             ),
 
-            const SizedBox(height: 20),
+            const SizedBox(height: 15),
 
             Text(
               title,
               style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                  height: 1.5,
+                fontSize: 17,
+                fontWeight: FontWeight.w500,
+                fontFamily: AppColors.priFontFamily,
+                height: 1.5,
                 color: Color(0xff292929),
               ),
             ),
@@ -79,28 +99,28 @@ class CommanCard extends StatelessWidget {
 
             Row(
               children: [
-                ElevatedButton.icon(
-                  onPressed: () {
-                    print("Connect Buyer Team clicked");
-                  },
-                  icon: const Icon(Icons.add, size: 16),
-                  label: Text(btnTitle, style: TextStyle(fontSize: 14)),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xff506995),
-                    foregroundColor: Colors.white,
-                    elevation: 0,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 10,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                ),
-
+                // ElevatedButton.icon(
+                //   onPressed: () {
+                //     print("Connect Buyer Team clicked");
+                //   },
+                //   icon: const Icon(Icons.add, size: 16,),
+                //   label: Text(btnTitle, style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400)),
+                //   style: ElevatedButton.styleFrom(
+                //     backgroundColor: AppColors.primary,
+                //     foregroundColor: AppColors.white,
+                //     elevation: 0,
+                //     padding: const EdgeInsets.symmetric(
+                //       horizontal: 10,
+                //       vertical: 5,
+                //     ),
+                //     shape: RoundedRectangleBorder(
+                //       borderRadius: BorderRadius.circular(12),
+                //     ),
+                //   ),
+                // ),
+                CommanButton(title: btnTitle, btnIcon: Icons.add,),
                 const SizedBox(width: 10),
-
+                // message icons container start from here
                 Container(
                   width: 40,
                   height: 40,
