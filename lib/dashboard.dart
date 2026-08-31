@@ -1,6 +1,7 @@
 import 'package:firstapp/components/comman_appbar.dart';
 import 'package:firstapp/screens/activity_screen.dart';
 import 'package:firstapp/screens/notification_screen.dart';
+import 'package:firstapp/screens/transaction_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,10 +12,11 @@ class Dashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CommanAppbar(
-        title: "Dashboard Test",
+        title: "Dashboard Screen",
         actionIcon: Icon(Icons.notifications, color: Colors.white),
         onActionPressed: (){
-          Get.to(()=> NotificationScreen());
+          // Get.to(()=> NotificationScreen());
+          Get.to(()=> TransactionScreen());
         },
       ),
       //  appBar: commonAppBar(title: "Dashboard test"),

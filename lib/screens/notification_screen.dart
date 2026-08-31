@@ -34,6 +34,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
         padding: const EdgeInsets.all(15.0),
         //play loader before getting the loader
         child: Obx(() {
+
           if (getNotificationController.isLoading.value) {
             return const CommanLoader(
               message: "Loading Notification",

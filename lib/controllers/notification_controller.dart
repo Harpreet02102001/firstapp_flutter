@@ -31,11 +31,10 @@ class NotificationController extends GetxController {
     try {
       //request with api ans wait for response
       var response = await NetworkUtil.get(
-        url: ApiEndpoint.instance.notificationApi,
+        url: '${ApiEndpoint.instance.notificationApi}?page=3',
         authToken: token,
       );
       //check for response code and than proceed
-
       //print the response after that proceed
       if (response.statusCode ==
           StatusCodeConstant.instance.successStatusCode) {
@@ -59,7 +58,7 @@ class NotificationController extends GetxController {
         }
       }
     } catch (e, t) {
-      print("getActivity Error : $e");
+      print("getActivity Error : $e, $t");
     } finally {
       isLoading.value = false;
     }

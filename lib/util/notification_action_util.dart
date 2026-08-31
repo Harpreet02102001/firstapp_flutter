@@ -9,6 +9,11 @@ class NotificationActionUtil {
       showAcceptRejectButton: false,
     ),
     ActionModel(
+      action: "TRANSACTION_AGENT_INVITE_DECLINED_BY_SELF",
+      message: "You declined transaction connection invitation from [Sender Agent Name] for '[Receiver Transaction Title]'",
+      showAcceptRejectButton: false,
+    ),
+    ActionModel(
       action: 'TRANSACTION_AGENT_INVITE_ACCEPTED_BY_SELF',
       message:
           "You accepted transaction connection invitation from [Sender Agent Name] for '[Receiver Transaction Title]'",
