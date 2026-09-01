@@ -1,9 +1,11 @@
 import 'package:firstapp/components/comman_appbar.dart';
 import 'package:firstapp/components/transaction_card.dart';
 import 'package:firstapp/components/comman_loader.dart';
+import 'package:firstapp/constants/app_colors.dart';
 import 'package:firstapp/util/controller_getter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'dart:math';
 
 class TransactionScreen extends StatefulWidget {
   const TransactionScreen({super.key});
@@ -19,6 +21,8 @@ class _TransactionScreenState extends State<TransactionScreen> {
     getTransactionController.getTransaction();
   }
 
+  final tabController = getTransactionController;
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -31,24 +35,108 @@ class _TransactionScreenState extends State<TransactionScreen> {
         ),
 
         body: Padding(
-          padding: const EdgeInsets.all(8),
-
+          padding: const EdgeInsets.only(
+            left: 0,
+            right: 0,
+          ),
           child: Column(
             children: [
-              //Tab Bar data and tabs will show here
-              const TabBar(
-                tabs: [
-                  Tab(text: "Active"),
-                  Tab(text: "Archived"),
-                  Tab(text: "Closed "),
-                ],
-              ),
+              SizedBox(height: 5,),
 
-              SizedBox(height: 15),
+              Obx(() {
+                if (tabController.isTabLoading.value) {
+                  return const SizedBox(
+                    height: 100,
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+                }
+
+                if (tabController.tabs.isEmpty) {
+                  return const SizedBox(
+                    child: Center(
+                      child: Text("No transaction status found"),
+                    ),
+                  );
+                }
+
+                return Container(
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFE3E7EF),
+                    // borderRadius: BorderRadius.circular(14),
+                  ),
+                  clipBehavior: Clip.antiAlias,
+                  child: TabBar(
+                    isScrollable: true,
+
+                    // Allow continuous horizontal scrolling
+                    physics: const BouncingScrollPhysics(),
+
+                    // Start from the left
+                    tabAlignment: TabAlignment.start,
+
+                    // Remove default padding
+                    padding: EdgeInsets.zero,
+
+                    // Selected tab
+                    indicator: BoxDecoration(
+                      color: const Color(0xFF344B78),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+
+                    indicatorSize: TabBarIndicatorSize.tab,
+                    indicatorPadding: EdgeInsets.zero,
+
+                    // Selected text
+                    labelColor: Colors.white,
+                    labelStyle: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
+
+                    // Unselected text
+                    unselectedLabelColor: const Color(0xFF707888),
+                    unselectedLabelStyle: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                    ),
+
+                    dividerColor: Colors.transparent,
+
+                    onTap: tabController.changeTab,
+
+                    tabs: tabController.tabs.map((tab) {
+                      return Tab(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 28,
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(tab.name),
+
+                              const SizedBox(width: 6),
+
+                              Text('(${tab.count})'),
+                            ],
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                );
+              }),
+
+
+              // SizedBox(height: 15),
 
               Expanded(
                 child: Obx(() {
-                  final transaction = getTransactionController.transaction.value;
+                  final transaction =
+                      getTransactionController.transaction.value;
 
                   if (getTransactionController.isLoading.value) {
                     return CommanLoader(message: "Loading Transaction");
@@ -84,16 +172,14 @@ class _TransactionScreenState extends State<TransactionScreen> {
               ),
             ],
           ),
-
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             // Write your home navigation code here
-
           },
           child: Icon(Icons.add),
+        ),
       ),
-    ),
     );
   }
 }
