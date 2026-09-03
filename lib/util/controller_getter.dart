@@ -1,15 +1,15 @@
 import 'package:firstapp/controllers/activity_controller.dart';
-import 'package:firstapp/controllers/login_controller.dart';
+import 'package:firstapp/controllers/auth_controller.dart';
 import 'package:firstapp/controllers/notification_controller.dart';
 import '../controllers/transaction_controller.dart';
 import 'package:get/get.dart';
 
 
 
-LoginController get getLoginController =>
-    Get.isRegistered<LoginController>()
-        ? Get.find<LoginController>()
-        : Get.put<LoginController>(LoginController());
+AuthController get getAuthController =>
+    Get.isRegistered<AuthController>()
+        ? Get.find<AuthController>()
+        : Get.put<AuthController>(AuthController());
 
 
 NotificationController get getNotificationController =>

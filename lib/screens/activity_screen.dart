@@ -26,7 +26,6 @@ class _ActivityScreenState extends State<ActivityScreen> {
     return Scaffold(
       appBar: CommanAppbar(
         title: "Activity Screen",
-        actionIcon: Icon(Icons.more_vert_outlined, color: Colors.white),
       ),
       body: Padding(
         padding: const EdgeInsets.all(25),

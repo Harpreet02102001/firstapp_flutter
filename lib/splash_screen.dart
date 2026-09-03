@@ -1,4 +1,7 @@
+import 'package:firstapp/dashboard.dart';
 import 'package:firstapp/screens/login_screen.dart';
+import 'package:firstapp/util/shared_pref/shared_keys.dart';
+import 'package:firstapp/util/shared_pref/shared_preference_util.dart';
 import 'package:flutter/material.dart';
 
 
@@ -15,10 +18,16 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Future.delayed(Duration(seconds: 3),() {
+    testLocalDb();
+
+
+    Future.delayed(Duration(seconds: 3),() async {
+
+        final  String? token = await SharedPreferenceUtil.getLocalString(key: SharedKeys().authTokenKey);
+
       Navigator.of(context).push(
         MaterialPageRoute<void>(
-          builder: (context) => LoginScreen(),
+          builder: (context) => token==null?LoginScreen():Dashboard(),
         ),
       );
     },);
@@ -51,4 +60,19 @@ class _SplashScreenState extends State<SplashScreen> {
     );
 
   }
+
+  Future<void> testLocalDb() async {
+   // await SharedPreferenceUtil.setLocalString(key: SharedKeys().loginResponseKey, value: "password");
+   //   final  String? storedData = await SharedPreferenceUtil.getLocalString(key: SharedKeys().loginResponseKey);
+   //  print("localStorage:--  $storedData");
+   //
+   //   SharedPreferenceUtil.clearLocalStorage();
+   //
+   //   final  String? storedDa = await SharedPreferenceUtil.getLocalString(key: SharedKeys().loginResponseKey);
+   //   print("localStorage:--  $storedDa");
+
+
+      // final  String? storedDa = await SharedPreferenceUtil.getLocalString(key: SharedKeys().loginResponseKey);
+  }
+
 }

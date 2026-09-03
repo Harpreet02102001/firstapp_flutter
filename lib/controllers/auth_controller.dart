@@ -4,14 +4,18 @@ import 'package:firstapp/network/network_util.dart';
 import 'package:firstapp/network/status_code_constant.dart';
 import 'package:firstapp/register_screen.dart';
 import 'package:firstapp/screens/activity_screen.dart';
+import 'package:firstapp/screens/login_screen.dart';
 import 'package:firstapp/util/comman_snackbar.dart';
+import 'package:firstapp/util/controller_getter.dart';
+import 'package:firstapp/util/shared_pref/shared_keys.dart';
+import 'package:firstapp/util/shared_pref/shared_preference_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart';
 import 'package:firstapp/dashboard.dart';
 import '../models/user_model.dart';
 
-class LoginController extends GetxController {
+class AuthController extends GetxController {
   final TextEditingController emailController = TextEditingController(
     text: "mamtarte25@gmail.com",
   );
@@ -105,6 +109,17 @@ class LoginController extends GetxController {
         errorMessage.value = "";
         //snackbar controlling start from here
 
+        //get the token from the Login Api and than save into the local storage
+
+        var token = getAuthController.user.value!.token.accessToken;
+
+        print("Token after login =  $token");
+
+        SharedPreferenceUtil.setLocalString(
+          key: SharedKeys().authTokenKey,
+          value: token,
+        );
+
         Get.snackbar(
           "Success",
           "Login successful",
@@ -184,5 +199,10 @@ class LoginController extends GetxController {
     } finally {
       isLoading.value = false;
     }
+  }
+
+  logout() {
+    SharedPreferenceUtil.clearLocalStorage();
+    Get.to(LoginScreen());
   }
 }

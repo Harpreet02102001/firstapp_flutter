@@ -1,15 +1,18 @@
+import 'package:firstapp/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import '../dashboard.dart';
 
-class SubmitButton extends StatelessWidget {
-// this is a contructor property
-  const SubmitButton({
+class CommanCardButton extends StatelessWidget {
+  // this is a contructor property
+  const CommanCardButton({
     super.key,
     required this.title,
+    this.btnIcon,
     //mention all the required here
   });
 
   final String title;
+  final IconData? btnIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +23,7 @@ class SubmitButton extends StatelessWidget {
         ).push(MaterialPageRoute(builder: (context) => Dashboard()));
       },
       child: Container(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
@@ -33,14 +36,16 @@ class SubmitButton extends StatelessWidget {
             ],
             stops: const [0.0, 1.0, 1.0],
           ),
-          borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(10),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(title,
+            Icon(btnIcon,color: AppColors.white,size: 20,),
+            Text(
+              title,
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 16, color: Colors.white),
+              style: TextStyle(fontSize: 14, color: Colors.white),
             ),
           ],
         ),

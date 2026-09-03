@@ -3,6 +3,7 @@ import 'package:firstapp/models/activity_model.dart';
 import 'package:firstapp/network/api_endpoint.dart';
 import 'package:firstapp/network/network_util.dart';
 import 'package:firstapp/network/status_code_constant.dart';
+import 'package:firstapp/util/app_data.dart';
 import 'package:firstapp/util/controller_getter.dart';
 import 'package:get/get.dart';
 import '../util/activity_action_util.dart';
@@ -12,14 +13,7 @@ class ActivityController extends GetxController {
   RxBool isLoading = false.obs;
 
   getActivity() async {
-    //variable for token
-    final token = getLoginController.user.value!.token.accessToken;
-
-    if (token == null || token.isEmpty) {
-      // not logged in / session out/ lost, don't force- unwrap null, just bail
-      print("get activity failed : no auth token");
-      return;
-    }
+    // //variable for token
 
     isLoading.value = true;
 
@@ -27,7 +21,7 @@ class ActivityController extends GetxController {
       //api request and wait for response
       var response = await NetworkUtil.get(
         url: ApiEndpoint.instance.activityApi,
-        authToken: token,
+        authToken: AppData.authToken,
       );
 
       // check status code before proceed

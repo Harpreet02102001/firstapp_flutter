@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:firstapp/models/notification_model.dart';
 import 'package:firstapp/network/api_endpoint.dart';
 import 'package:firstapp/network/network_util.dart';
+import 'package:firstapp/util/app_data.dart';
 import 'package:firstapp/util/controller_getter.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
@@ -19,20 +20,14 @@ class NotificationController extends GetxController {
 
   getNotification() async {
     // // api request and await for response
-    final token = getLoginController.user.value!.token.accessToken;
 
-    if (token == null || token.isEmpty) {
-      // not logged in / session out/ lost, don't force- unwrap null, just bail
-      print("get notification &  auth is failed : no auth Token");
-      return;
-    }
     isLoading.value = true;
 
     try {
       //request with api ans wait for response
       var response = await NetworkUtil.get(
         url: '${ApiEndpoint.instance.notificationApi}?page=3',
-        authToken: token,
+        authToken: AppData.authToken,
       );
       //check for response code and than proceed
       //print the response after that proceed

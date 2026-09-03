@@ -48,7 +48,7 @@ class LoginScreen extends StatelessWidget {
 
               Obx(() {
                 return TextFormField(
-                  controller: getLoginController.emailController,
+                  controller: getAuthController.emailController,
                   decoration: InputDecoration(
                     prefixIcon: Icon(Icons.email),
                     labelText: "Enter Your Email",
@@ -56,9 +56,9 @@ class LoginScreen extends StatelessWidget {
                       borderSide: BorderSide(color: Colors.blue, width: 2.0),
                       borderRadius: BorderRadius.circular(15),
                     ),
-                    errorText: getLoginController.emailError.value.isEmpty
+                    errorText: getAuthController.emailError.value.isEmpty
                         ? null
-                        : getLoginController.emailError.value,
+                        : getAuthController.emailError.value,
                   ),
                 );
               }),
@@ -66,16 +66,16 @@ class LoginScreen extends StatelessWidget {
               const SizedBox(height: 15),
               Obx(() {
                 return TextField(
-                  controller: getLoginController.passwordController,
+                  controller: getAuthController.passwordController,
                   obscureText: true,
                   keyboardType: TextInputType.visiblePassword,
                   decoration: InputDecoration(
                     prefixIcon: Icon(Icons.lock),
                     suffixIcon: Icon(Icons.remove_red_eye_outlined),
                     labelText: "Password",
-                    errorText: getLoginController.passwordError.value.isEmpty
+                    errorText: getAuthController.passwordError.value.isEmpty
                         ? null
-                        : getLoginController.passwordError.value,
+                        : getAuthController.passwordError.value,
                     border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.blue, width: 2.0),
                       borderRadius: BorderRadius.circular(15),
@@ -84,14 +84,14 @@ class LoginScreen extends StatelessWidget {
                 );
               }),
               Obx(() {
-                if (getLoginController.errorMessage.value.isEmpty) {
+                if (getAuthController.errorMessage.value.isEmpty) {
                   return const SizedBox();
                 }
 
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 15),
                   child: Text(
-                    getLoginController.errorMessage.value,
+                    getAuthController.errorMessage.value,
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       color: Colors.red,
@@ -121,7 +121,7 @@ class LoginScreen extends StatelessWidget {
               SizedBox(height: 30),
               InkWell(
                 onTap: () {
-                  var userLogin = getLoginController.userLogin();
+                  var userLogin = getAuthController.userLogin();
                 },
                 child: Container(
                   padding: const EdgeInsets.all(10.0),

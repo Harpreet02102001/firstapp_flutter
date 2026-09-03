@@ -1,29 +1,23 @@
-import 'package:firstapp/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import '../dashboard.dart';
 
-class CommanButton extends StatelessWidget {
-  // this is a contructor property
-  const CommanButton({
+class CommonButton extends StatelessWidget {
+// this is a contructor property
+  const CommonButton({
     super.key,
-    required this.title,
-    this.btnIcon,
+    required this.title, required this.onTab,
     //mention all the required here
   });
 
   final String title;
-  final IconData? btnIcon;
+  final Function() onTab;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        Navigator.of(
-          context,
-        ).push(MaterialPageRoute(builder: (context) => Dashboard()));
-      },
+      onTap: onTab,
       child: Container(
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.all(10.0),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
@@ -36,16 +30,14 @@ class CommanButton extends StatelessWidget {
             ],
             stops: const [0.0, 1.0, 1.0],
           ),
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(30),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(btnIcon,color: AppColors.white,size: 20,),
-            Text(
-              title,
+            Text(title,
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 14, color: Colors.white),
+              style: TextStyle(fontSize: 16, color: Colors.white),
             ),
           ],
         ),

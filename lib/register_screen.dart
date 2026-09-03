@@ -1,7 +1,7 @@
 import 'package:firstapp/components/comman_appbar.dart';
 import 'package:firstapp/components/comman_textformfield.dart';
 import 'package:firstapp/components/main_heading.dart';
-import 'package:firstapp/components/submit_button.dart';
+import 'package:firstapp/components/common_button.dart';
 import 'package:flutter/material.dart';
 
 final TextEditingController firstNameController = TextEditingController();
@@ -119,7 +119,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
               isRequired: true,
             ),
             SizedBox(height: 50),
-            SubmitButton(title: "CONTINUE"),
+            CommonButton(title: "CONTINUE",onTab: () {
+
+            },),
           ],
         ),
       ),

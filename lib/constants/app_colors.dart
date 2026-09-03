@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 class AppColors {
   AppColors._();
 
-
   static final AppColors instance = AppColors._();
 
   static const String priFontFamily = "Roboto";

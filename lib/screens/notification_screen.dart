@@ -25,10 +25,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
     return Scaffold(
       appBar: CommanAppbar(
         title: "Notification Screen",
-        actionIcon: const Icon(
-          Icons.more_vert,
-          color: Colors.white,
-        ),
+
       ),
       body: Padding(
         padding: const EdgeInsets.all(15.0),

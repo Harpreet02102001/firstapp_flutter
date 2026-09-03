@@ -18,20 +18,18 @@ class _TransactionScreenState extends State<TransactionScreen> {
   @override
   void initState() {
     super.initState();
-    getTransactionController.getTransaction();
+    getTransactionController.getTransactionTabs();
   }
 
-  final tabController = getTransactionController;
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
+    return Obx(() => getTransactionController.tabs.isEmpty?SizedBox.shrink(): DefaultTabController(
       // length means = how many tab is required
-      length: 3,
+      length: getTransactionController.tabs.length,
       child: Scaffold(
         appBar: CommanAppbar(
           title: "Transaction Screen",
-          actionIcon: const Icon(Icons.search, color: Colors.white),
         ),
 
         body: Padding(
@@ -44,7 +42,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
               SizedBox(height: 5,),
 
               Obx(() {
-                if (tabController.isTabLoading.value) {
+                if (getTransactionController.isTabLoading.value) {
                   return const SizedBox(
                     height: 100,
                     child: Center(
@@ -53,7 +51,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
                   );
                 }
 
-                if (tabController.tabs.isEmpty) {
+                if (getTransactionController.tabs.isEmpty) {
                   return const SizedBox(
                     child: Center(
                       child: Text("No transaction status found"),
@@ -63,6 +61,9 @@ class _TransactionScreenState extends State<TransactionScreen> {
 
                 return Container(
                   height: 40,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 8,
+                  ),
                   decoration: BoxDecoration(
                     color: const Color(0xFFE3E7EF),
                     // borderRadius: BorderRadius.circular(14),
@@ -105,9 +106,9 @@ class _TransactionScreenState extends State<TransactionScreen> {
 
                     dividerColor: Colors.transparent,
 
-                    onTap: tabController.changeTab,
+                    onTap: getTransactionController.changeTab,
 
-                    tabs: tabController.tabs.map((tab) {
+                    tabs: getTransactionController.tabs.map((tab) {
                       return Tab(
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
@@ -180,6 +181,6 @@ class _TransactionScreenState extends State<TransactionScreen> {
           child: Icon(Icons.add),
         ),
       ),
-    );
+    ));
   }
 }

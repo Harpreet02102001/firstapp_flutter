@@ -1,24 +1,60 @@
 import 'package:firstapp/components/comman_appbar.dart';
+import 'package:firstapp/components/common_button.dart';
 import 'package:firstapp/screens/activity_screen.dart';
+import 'package:firstapp/screens/login_screen.dart';
 import 'package:firstapp/screens/notification_screen.dart';
 import 'package:firstapp/screens/transaction_screen.dart';
 import 'package:firstapp/screens/transactions/details/transaction_detail_screen.dart';
+import 'package:firstapp/util/app_data.dart';
+import 'package:firstapp/util/controller_getter.dart';
+import 'package:firstapp/util/shared_pref/shared_keys.dart';
+import 'package:firstapp/util/shared_pref/shared_preference_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class Dashboard extends StatelessWidget {
+class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
+
+  @override
+  State<Dashboard> createState() => _DashboardState();
+}
+
+class _DashboardState extends State<Dashboard> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    initLocalToken();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CommanAppbar(
         title: "Dashboard Screen",
-        actionIcon: Icon(Icons.notifications, color: Colors.white),
-        onActionPressed: (){
-          // Get.to(()=> NotificationScreen());
-          Get.to(()=> TransactionScreen());
-        },
+
+        actions: [
+          InkWell(
+            onTap: () {
+              Get.to(TransactionScreen());
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(Icons.inbox, color: Colors.white),
+            ),
+          ),
+
+          InkWell(
+            onTap: () {
+              Get.to(NotificationScreen());
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(Icons.notifications, color: Colors.white),
+            ),
+          ),
+        ],
       ),
       //  appBar: commonAppBar(title: "Dashboard test"),
       body: Padding(
@@ -108,7 +144,7 @@ class Dashboard extends StatelessWidget {
                   ),
                 ),
 
-                SizedBox(width: 20,),
+                SizedBox(width: 20),
                 InkWell(
                   onTap: () {
                     Get.to(() => TransactionDetailScreen());
@@ -145,9 +181,24 @@ class Dashboard extends StatelessWidget {
               ],
             ),
             SizedBox(height: 20),
+
+            //Logout button
+            CommonButton(
+              title: "Logout ",
+              onTab: () {
+                getAuthController.logout();
+              },
+            ),
           ],
         ),
       ),
     );
+  }
+
+  Future<void> initLocalToken() async {
+    final String? token = await SharedPreferenceUtil.getLocalString(
+      key: SharedKeys().authTokenKey,
+    );
+    AppData.authToken = token ?? "";
   }
 }

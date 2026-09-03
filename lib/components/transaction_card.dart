@@ -1,5 +1,5 @@
-import 'package:firstapp/components/comman_button.dart';
-import 'package:firstapp/components/submit_button.dart';
+import 'package:firstapp/components/comman_card_button.dart';
+import 'package:firstapp/components/common_button.dart';
 import 'package:firstapp/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -118,7 +118,7 @@ class CommanCard extends StatelessWidget {
                 //     ),
                 //   ),
                 // ),
-                CommanButton(title: btnTitle, btnIcon: Icons.add,),
+                CommanCardButton(title: btnTitle, btnIcon: Icons.add,),
                 const SizedBox(width: 10),
                 // message icons container start from here
                 Container(

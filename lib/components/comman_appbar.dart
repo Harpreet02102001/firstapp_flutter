@@ -9,26 +9,21 @@ import 'package:flutter/material.dart';
 // }
 
 class CommanAppbar extends StatelessWidget implements PreferredSizeWidget {
-  const CommanAppbar({
+   CommanAppbar({
     super.key,
     required this.title,
-    this.actionIcon,
-    this.onActionPressed,
+     this.actions,
   });
 
   final String title;
-  final Icon? actionIcon;
-  final VoidCallback? onActionPressed;
-
+  List<Widget>? actions;
   @override
   Widget build(BuildContext context) {
     return AppBar(
       title: Text(title,style:TextStyle(
         fontSize: 16,
       ) ,),
-      actions: actionIcon == null
-          ? null
-          : [IconButton(onPressed: onActionPressed, icon: actionIcon!)],
+      actions: actions
     );
   }
 
